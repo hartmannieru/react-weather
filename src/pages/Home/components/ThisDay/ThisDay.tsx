@@ -1,18 +1,19 @@
 import React from 'react';
 import { GlobalSvgSelector } from '../../../../assets/icons/shared/GlobalSvgSelector';
+import { Weather } from '../../../../store/types/types';
 
 import s from './ThisDay.module.scss';
 
 interface Props {
-  
+  weather: Weather;
 }
 
-export const ThisDay = (props: Props) => {
+export const ThisDay = ({ weather }: Props) => {
   return (
     <div className={s.this__day}>
       <div className={s.top__block}>
         <div className={s.top__block_wrapper}>
-          <div className={s.this__temp}>20°</div>
+          <div className={s.this__temp}>{Math.round(weather.main.temp)}°</div>
           <div className={s.this__day_name}>Сегодня</div>
         </div>
         <GlobalSvgSelector id="sun" />
@@ -22,7 +23,7 @@ export const ThisDay = (props: Props) => {
           Время: <span>21:54</span>
         </div>
         <div className={s.this__city}>
-          Время: <span>Санкт-Петербург</span>
+          Город: <span>Санкт-Петербург</span>
         </div>
       </div>
     </div>
