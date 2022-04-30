@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select'
 import { GlobalSvgSelector } from '../../assets/icons/shared/GlobalSvgSelector';
+import { useTheme } from '../../hooks/useTheme';
 
 import s from './Header.module.scss';
 
@@ -9,18 +10,18 @@ interface Props {
 }
 
 export const Header = (props: Props) => {
+  const theme = useTheme();
+
   const options = [
     { value: 'city-1', label: 'Санкт-Петербург' },
     { value: 'city-2', label: 'Москва' },
     { value: 'city-3', label: 'Новгород' }
   ];
 
-  const [theme, setTheme] = useState('light');
-
   const colorStyles = {
     control: (styles: any) => ({
       ...styles,
-      backgroundColor: theme === 'dark' ? '#4f4f4f' : 'rgba(71, 147, 255, 0.2)',
+      backgroundColor: theme.theme === 'dark' ? '#4f4f4f' : 'rgba(71, 147, 255, 0.2)',
       width: '194px',
       height: '37px',
       border: 'none',
@@ -29,12 +30,12 @@ export const Header = (props: Props) => {
     }),
     singleValue: (styles: any) => ({
       ...styles,
-      color:  theme === 'dark' ? '#fff' : '#000',
+      color:  theme.theme === 'dark' ? '#fff' : '#000',
     })
   }
 
   function changeTheme() {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    theme.changeTheme(theme.theme === 'light' ? 'dark' : 'light');
   }
 
   useEffect(() => {
@@ -51,10 +52,10 @@ export const Header = (props: Props) => {
     components.forEach(component => {
       root.style.setProperty(
         `--${component}-default`, 
-        `var(--${component}-${theme})`)
+        `var(--${component}-${theme.theme})`)
       ;
     })
-  }, [theme])
+  }, [theme.theme])
 
   return (
     <header className={s.header}>
