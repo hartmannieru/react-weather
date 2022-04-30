@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select'
 import { GlobalSvgSelector } from '../../assets/icons/shared/GlobalSvgSelector';
+import { Theme } from '../../context/ThemeContext';
 import { useTheme } from '../../hooks/useTheme';
 
 import s from './Header.module.scss';
@@ -30,32 +31,13 @@ export const Header = (props: Props) => {
     }),
     singleValue: (styles: any) => ({
       ...styles,
-      color:  theme.theme === 'dark' ? '#fff' : '#000',
+      color:  theme.theme === Theme.DARK ? '#fff' : '#000',
     })
   }
 
   function changeTheme() {
-    theme.changeTheme(theme.theme === 'light' ? 'dark' : 'light');
+    theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
   }
-
-  useEffect(() => {
-    const root = document.querySelector(':root') as HTMLElement;
-
-    const components = [
-      'body-background',
-      'components-background',
-      'card-background',
-      'card-shadow',
-      'text-color'
-    ]
-    
-    components.forEach(component => {
-      root.style.setProperty(
-        `--${component}-default`, 
-        `var(--${component}-${theme.theme})`)
-      ;
-    })
-  }, [theme.theme])
 
   return (
     <header className={s.header}>
