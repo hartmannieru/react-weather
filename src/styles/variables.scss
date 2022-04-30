@@ -40,7 +40,7 @@ $card-box-shadow-dark: 0px 3px 20px rgba(5, 5, 5, 0.28);
   --card-shadow-light: #{$card-box-shadow-light};
   --card-shadow-default: var(#{--card-shadow-light});
 
-  //text
+  //text-color
   --text-color-dark: #{$dark-color};
   --text-color-light: #{$light-color};
   --text-color-default: var(#{--text-color-light});
